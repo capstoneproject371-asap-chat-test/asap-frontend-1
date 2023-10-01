@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anuphan&display=swap');
+
+body {
+  font-family: 'Anuphan', sans-serif;
+}
+
+.btn-shadow {
+  box-shadow: 0px 1px 6px 0px #00000040;
+}
+
+button {
+  border-radius: 12px;
+}
+
+v-text-field:hover {
+  border-color: #7450c8;
+}

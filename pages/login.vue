@@ -1,0 +1,84 @@
+<template>
+  <div class="hero min-h-screen bg-base-200">
+    <div
+      class="card flex-shrink-0 sm:max-w-xl max-w-xs shadow-2xl bg-base-100"
+      style="width: 1500px"
+    >
+      <div class="card-body">
+        <div class="text-center">
+          <v-img
+            :width="100"
+            aspect-ratio="1/1"
+            src="/images/logo.png"
+            class="mx-auto"
+          ></v-img>
+          <p class="mb-5">
+            ระบบจัดการแชตลูกค้า<br />สำหรับร้านค้าใน Social Media
+          </p>
+          <h5 class="text-3xl font-bold mb-4">เข้าสู่ระบบ ASAP</h5>
+        </div>
+        <div class="form-control">
+          <v-text-field
+            :rules="[ruleRequired, ruleEmail]"
+            v-model="email"
+            id="email"
+            name="email"
+            type="email"
+            label="อีเมล"
+            variant="outlined"
+            color="primary"
+            class="rounded-xl"
+          ></v-text-field>
+        </div>
+        <div class="form-control">
+          <v-text-field
+            :rules="[ruleRequired]"
+            v-model="password"
+            id="password"
+            name="password"
+            label="รหัสผ่าน"
+            variant="outlined"
+            color="primary"
+            @click:append-inner="visible = !visible"
+            :append-inner-icon="visible ? 'mdi-eye' : 'mdi-eye-off'"
+            :type="visible ? 'text' : 'password'"
+          ></v-text-field>
+        </div>
+        <div class="form-control my-2">
+          <v-btn
+            block
+            size="large"
+            color="primary"
+            rounded="lg"
+            class="font-weight-bold"
+          >
+            เข้าสู่ระบบ
+          </v-btn>
+        </div>
+        <p class="text-medium-emphasis">
+          ยังไม่เคยมีบัญชี?
+          <NuxtLink to="/signup">
+            <a
+              class="text-primary text-decoration-underline"
+              href="#"
+            >
+              ลงทะเบียนที่นี่</a
+            >
+          </NuxtLink>
+        </p>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+useHead({
+  title: 'เข้าสู่ระบบ',
+})
+
+const email = ref('')
+const password = ref('')
+const visible = ref(false)
+
+const { ruleEmail, ruleRequired } = useFormRules()
+</script>
