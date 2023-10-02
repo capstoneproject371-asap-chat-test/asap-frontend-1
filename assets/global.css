@@ -13,6 +13,7 @@ button {
   border-radius: 12px;
 }
 
-v-text-field:hover {
-  border-color: #7450c8;
+.v-radio-group,
+.v-checkbox {
+  color: rgb(0, 0, 0);
 }
