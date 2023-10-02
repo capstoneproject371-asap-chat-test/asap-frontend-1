@@ -1,7 +1,7 @@
 <template>
-  <div class="hero min-h-screen bg-base-200">
+  <div class="hero min-h-screen lg:bg-base-200 xs:bg-white">
     <div
-      class="card flex-shrink-0 sm:max-w-xl max-w-xs shadow-2xl bg-base-100"
+      class="card flex-shrink-0 sm:max-w-xl max-w-sm lg:shadow-2xl bg-base-100"
       style="width: 1500px"
     >
       <div class="card-body">
@@ -19,7 +19,7 @@
         </div>
         <div class="form-control">
           <v-text-field
-            :rules="[ruleRequired, ruleEmail]"
+            :rules="[required, checkEmail]"
             v-model="email"
             id="email"
             name="email"
@@ -32,7 +32,7 @@
         </div>
         <div class="form-control">
           <v-text-field
-            :rules="[ruleRequired]"
+            :rules="[required]"
             v-model="password"
             id="password"
             name="password"
@@ -80,5 +80,5 @@ const email = ref('')
 const password = ref('')
 const visible = ref(false)
 
-const { ruleEmail, ruleRequired } = useFormRules()
+const { checkEmail, required } = useFormRules()
 </script>
