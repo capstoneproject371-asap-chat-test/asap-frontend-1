@@ -17,44 +17,47 @@
           </p>
           <h5 class="text-3xl font-bold mb-4">เข้าสู่ระบบ ASAP</h5>
         </div>
-        <div class="form-control">
-          <v-text-field
-            :rules="[required, checkEmail]"
-            v-model="email"
-            id="email"
-            name="email"
-            type="email"
-            label="อีเมล"
-            variant="outlined"
-            color="primary"
-            class="rounded-xl"
-          ></v-text-field>
-        </div>
-        <div class="form-control">
-          <v-text-field
-            :rules="[required]"
-            v-model="password"
-            id="password"
-            name="password"
-            label="รหัสผ่าน"
-            variant="outlined"
-            color="primary"
-            @click:append-inner="visible = !visible"
-            :append-inner-icon="visible ? 'mdi-eye' : 'mdi-eye-off'"
-            :type="visible ? 'text' : 'password'"
-          ></v-text-field>
-        </div>
-        <div class="form-control my-2">
-          <v-btn
-            block
-            size="large"
-            color="primary"
-            rounded="lg"
-            class="font-weight-bold"
-          >
-            เข้าสู่ระบบ
-          </v-btn>
-        </div>
+        <v-form v-model="isFormValid">
+          <div class="form-control">
+            <v-text-field
+              :rules="[required, checkEmail]"
+              v-model="email"
+              id="email"
+              name="email"
+              type="email"
+              label="อีเมล"
+              variant="outlined"
+              color="primary"
+              class="rounded-xl"
+            ></v-text-field>
+          </div>
+          <div class="form-control mt-3">
+            <v-text-field
+              :rules="[required]"
+              v-model="password"
+              id="password"
+              name="password"
+              label="รหัสผ่าน"
+              variant="outlined"
+              color="primary"
+              @click:append-inner="visible = !visible"
+              :append-inner-icon="visible ? 'mdi-eye' : 'mdi-eye-off'"
+              :type="visible ? 'text' : 'password'"
+            ></v-text-field>
+          </div>
+          <div class="form-control my-2">
+            <v-btn
+              block
+              size="large"
+              color="primary"
+              rounded="lg"
+              class="font-weight-bold"
+              :disabled="!isFormValid"
+            >
+              เข้าสู่ระบบ
+            </v-btn>
+          </div>
+        </v-form>
         <p class="text-medium-emphasis">
           ยังไม่เคยมีบัญชี?
           <NuxtLink to="/signup">
@@ -78,6 +81,8 @@ useHead({
 
 const email = ref('')
 const password = ref('')
+const isFormValid = ref(false)
+
 const visible = ref(false)
 
 const { checkEmail, required } = useFormRules()
