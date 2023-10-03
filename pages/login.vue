@@ -1,4 +1,5 @@
 <template>
+  <!-- TODO: connect with firebase -->
   <div class="hero min-h-screen lg:bg-base-200 xs:bg-white">
     <div
       class="card flex-shrink-0 sm:max-w-xl max-w-sm lg:shadow-2xl bg-base-100"
@@ -22,6 +23,7 @@
             <v-text-field
               :rules="[required, checkEmail]"
               v-model="email"
+              density="compact"
               id="email"
               name="email"
               type="email"
@@ -31,10 +33,11 @@
               class="rounded-xl"
             ></v-text-field>
           </div>
-          <div class="form-control mt-3">
+          <div class="form-control mt-2">
             <v-text-field
               :rules="[required]"
               v-model="password"
+              density="compact"
               id="password"
               name="password"
               label="รหัสผ่าน"
@@ -58,7 +61,7 @@
             </v-btn>
           </div>
         </v-form>
-        <p class="text-medium-emphasis">
+        <p class="text-medium-emphasis text-black">
           ยังไม่เคยมีบัญชี?
           <NuxtLink to="/signup">
             <a

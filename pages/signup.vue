@@ -1,9 +1,9 @@
 <template>
+  <!-- TODO: connect with firebase -->
   <div class="hero min-h-screen lg:bg-base-200">
     <div
-      class="card flex-shrink-0 sm:max-w-xl max-w-sm sm:shadow-2xl bg-base-100"
+      class="card flex-shrink-0 sm:max-w-xl max-w-sm lg:shadow-2xl bg-base-100"
       style="width: 1500px"
-      :class="{ 'mt-5 mb-5': userInfo?.isOwner }"
     >
       <div class="card-body">
         <div class="text-center">
@@ -19,10 +19,11 @@
           <h5 class="text-3xl font-bold mb-4">สร้างบัญชี ASAP</h5>
         </div>
         <v-form v-model="isFormValid">
-          <div class="form-control mt-3">
+          <div class="form-control mt-2">
             <v-text-field
               :rules="[required, checkEmail]"
               v-model="userInfo.email"
+              density="compact"
               id="email"
               name="email"
               type="email"
@@ -32,10 +33,11 @@
               class="rounded-xl"
             ></v-text-field>
           </div>
-          <div class="form-control mt-3">
+          <div class="form-control mt-2">
             <v-text-field
               :rules="[required, passwordLength]"
               v-model="userInfo.password"
+              density="compact"
               id="password"
               name="password"
               label="รหัสผ่าน"
@@ -47,7 +49,7 @@
               counter
             ></v-text-field>
           </div>
-          <div class="form-control mt-3">
+          <div class="form-control mt-2">
             <v-text-field
               :rules="[
                 required,
@@ -55,6 +57,7 @@
                 confirmPassword(userInfo.confirmPassword, userInfo.password),
               ]"
               v-model="userInfo.confirmPassword"
+              density="compact"
               id="confirm-password"
               name="confirm-password"
               label="ยืนยันรหัสผ่าน"
@@ -65,10 +68,11 @@
               :type="confirmVisible ? 'text' : 'password'"
             ></v-text-field>
           </div>
-          <div class="form-control mt-3">
+          <div class="form-control mt-2">
             <v-radio-group
               label="คุณเป็นเจ้าของร้านค้าใช่หรือไม่?"
               inline
+              hide-details
               v-model="userInfo.isOwner"
             >
               <v-radio
@@ -99,6 +103,7 @@
             <v-text-field
               :rules="[required]"
               v-model="userInfo.shop!.name"
+              density="compact"
               id="bizName"
               name="bizName"
               type="text"
@@ -111,6 +116,7 @@
           <div class="form-control mb-3">
             <v-autocomplete
               label="ประเภทธุรกิจ"
+              density="compact"
               variant="outlined"
               color="primary"
               :rules="[required]"
@@ -122,6 +128,7 @@
             <v-text-field
               label="รายละเอียด (ไม่จำเป็น)"
               placeholder="เช่น ร้านขายเสื้อผ้า, ร้านเสริมสวย"
+              density="compact"
               color="primary"
               variant="outlined"
               v-model="userInfo.shop!.detail"
@@ -147,6 +154,7 @@
                     ? [required, facebookLink]
                     : []
                 "
+                density="compact"
                 v-model="userInfo.shop!.social!.facebook"
                 label="Facebook Page Link"
                 color="primary"
@@ -166,6 +174,7 @@
                     ? [required, instagramLink]
                     : []
                 "
+                density="compact"
                 v-model="userInfo.shop!.social!.instagram"
                 label="Instagram Page Link"
                 color="primary"
@@ -180,6 +189,7 @@
               ></v-checkbox>
               <v-text-field
                 v-if="selectedSocial.find((value) => value === 'line')"
+                density="compact"
                 :rules="selectedSocial.includes('line') ? [required] : []"
                 v-model="userInfo.shop!.social!.line"
                 label="ID Line Official Account"
