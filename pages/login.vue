@@ -20,33 +20,26 @@
         </div>
         <v-form v-model="isFormValid">
           <div class="form-control">
-            <v-text-field
+            <CommonTextField
               :rules="[required, checkEmail]"
               v-model="email"
-              density="compact"
               id="email"
               name="email"
               type="email"
               label="อีเมล"
-              variant="outlined"
-              color="primary"
-              class="rounded-xl"
-            ></v-text-field>
+            />
           </div>
           <div class="form-control mt-2">
-            <v-text-field
+            <CommonTextField
               :rules="[required]"
               v-model="password"
-              density="compact"
               id="password"
               name="password"
               label="รหัสผ่าน"
-              variant="outlined"
-              color="primary"
               @click:append-inner="visible = !visible"
               :append-inner-icon="visible ? 'mdi-eye' : 'mdi-eye-off'"
               :type="visible ? 'text' : 'password'"
-            ></v-text-field>
+            />
           </div>
           <div class="form-control my-2">
             <v-btn
@@ -79,7 +72,7 @@
 
 <script setup lang="ts">
 useHead({
-  title: 'เข้าสู่ระบบ',
+  title: 'Welcome to ASAP',
 })
 
 const email = ref('')

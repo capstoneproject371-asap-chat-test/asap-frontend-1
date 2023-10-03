@@ -20,53 +20,43 @@
         </div>
         <v-form v-model="isFormValid">
           <div class="form-control mt-2">
-            <v-text-field
+            <CommonTextField
               :rules="[required, checkEmail]"
               v-model="userInfo.email"
-              density="compact"
               id="email"
               name="email"
               type="email"
               label="อีเมล"
-              variant="outlined"
-              color="primary"
-              class="rounded-xl"
-            ></v-text-field>
+            />
           </div>
           <div class="form-control mt-2">
-            <v-text-field
+            <CommonTextField
               :rules="[required, passwordLength]"
               v-model="userInfo.password"
-              density="compact"
               id="password"
               name="password"
               label="รหัสผ่าน"
-              variant="outlined"
-              color="primary"
               @click:append-inner="visible = !visible"
               :append-inner-icon="visible ? 'mdi-eye' : 'mdi-eye-off'"
               :type="visible ? 'text' : 'password'"
               counter
-            ></v-text-field>
+            />
           </div>
           <div class="form-control mt-2">
-            <v-text-field
+            <CommonTextField
               :rules="[
                 required,
                 passwordLength,
                 confirmPassword(userInfo.confirmPassword, userInfo.password),
               ]"
               v-model="userInfo.confirmPassword"
-              density="compact"
               id="confirm-password"
               name="confirm-password"
               label="ยืนยันรหัสผ่าน"
-              variant="outlined"
-              color="primary"
               @click:append-inner="confirmVisible = !confirmVisible"
               :append-inner-icon="confirmVisible ? 'mdi-eye' : 'mdi-eye-off'"
               :type="confirmVisible ? 'text' : 'password'"
-            ></v-text-field>
+            />
           </div>
           <div class="form-control mt-2">
             <v-radio-group
@@ -100,18 +90,14 @@
         <!-- Biz question -->
         <div v-if="!!userInfo?.isOwner">
           <div class="form-control mb-3">
-            <v-text-field
+            <CommonTextField
               :rules="[required]"
               v-model="userInfo.shop!.name"
-              density="compact"
               id="bizName"
               name="bizName"
               type="text"
               label="ชื่อธุรกิจ"
-              variant="outlined"
-              color="primary"
-              class="rounded-xl"
-            ></v-text-field>
+            />
           </div>
           <div class="form-control mb-3">
             <v-autocomplete
@@ -125,14 +111,11 @@
             ></v-autocomplete>
           </div>
           <div class="form-controls mb-3">
-            <v-text-field
+            <CommonTextField
               label="รายละเอียด (ไม่จำเป็น)"
               placeholder="เช่น ร้านขายเสื้อผ้า, ร้านเสริมสวย"
-              density="compact"
-              color="primary"
-              variant="outlined"
               v-model="userInfo.shop!.detail"
-            ></v-text-field>
+            />
           </div>
           <v-form v-model="isSocialValid">
             <div class="form-control mt-5">
@@ -147,19 +130,16 @@
                 color="primary"
                 hide-details
               ></v-checkbox>
-              <v-text-field
+              <CommonTextField
                 v-if="selectedSocial.find((value) => value === 'facebook')"
                 :rules="
                   selectedSocial.includes('facebook')
                     ? [required, facebookLink]
                     : []
                 "
-                density="compact"
                 v-model="userInfo.shop!.social!.facebook"
                 label="Facebook Page Link"
-                color="primary"
-                variant="outlined"
-              ></v-text-field>
+              />
               <v-checkbox
                 v-model="selectedSocial"
                 label="Instagram"
@@ -167,19 +147,16 @@
                 color="primary"
                 hide-details
               ></v-checkbox>
-              <v-text-field
+              <CommonTextField
                 v-if="selectedSocial.find((value) => value === 'instagram')"
                 :rules="
                   selectedSocial.includes('instagram')
                     ? [required, instagramLink]
                     : []
                 "
-                density="compact"
                 v-model="userInfo.shop!.social!.instagram"
                 label="Instagram Page Link"
-                color="primary"
-                variant="outlined"
-              ></v-text-field>
+              />
               <v-checkbox
                 v-model="selectedSocial"
                 label="Line"
@@ -187,15 +164,12 @@
                 color="primary"
                 hide-details
               ></v-checkbox>
-              <v-text-field
+              <CommonTextField
                 v-if="selectedSocial.find((value) => value === 'line')"
-                density="compact"
                 :rules="selectedSocial.includes('line') ? [required] : []"
                 v-model="userInfo.shop!.social!.line"
                 label="ID Line Official Account"
-                color="primary"
-                variant="outlined"
-              ></v-text-field>
+              />
             </div>
           </v-form>
         </div>
