@@ -12,7 +12,7 @@
             aspect-ratio="1/1"
             src="/images/logo.png"
             class="mx-auto"
-          ></v-img>
+          />
           <p class="mb-5">
             ระบบจัดการแชตลูกค้า<br />สำหรับร้านค้าใน Social Media
           </p>
@@ -47,6 +47,7 @@
               size="large"
               color="primary"
               rounded="lg"
+              type="submit"
               class="font-weight-bold"
               :disabled="!isFormValid"
             >

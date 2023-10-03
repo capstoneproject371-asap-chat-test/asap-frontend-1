@@ -102,6 +102,7 @@
           <div class="form-control mb-3">
             <v-autocomplete
               label="ประเภทธุรกิจ"
+              id="bizCategory"
               density="compact"
               variant="outlined"
               color="primary"
@@ -169,6 +170,7 @@
                 :rules="selectedSocial.includes('line') ? [required] : []"
                 v-model="userInfo.shop!.social!.line"
                 label="ID Line Official Account"
+                data-test="idLine"
               />
             </div>
           </v-form>
