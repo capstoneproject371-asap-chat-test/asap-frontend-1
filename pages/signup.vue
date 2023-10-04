@@ -183,6 +183,7 @@
             rounded="lg"
             class="font-weight-bold"
             :disabled="isButtonDisabled"
+            @click="handleRegistration(userInfo)"
           >
             สร้างบัญชีผู้ใช้งาน
           </v-btn>
@@ -213,6 +214,8 @@ const {
   facebookLink,
   instagramLink,
 } = useFormRules()
+
+const { registerUser } = useFirebaseAuth() // auto-imported
 
 const userInfo = ref<UserSignup>({
   email: '',
@@ -271,5 +274,9 @@ const resetShopValue = () => {
       line: '',
     },
   }
+}
+
+const handleRegistration = async (user: UserSignup) => {
+  await registerUser(user.email, user.password)
 }
 </script>
