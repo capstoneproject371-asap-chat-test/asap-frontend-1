@@ -16,7 +16,7 @@
           <p class="tw-mb-5">
             ระบบจัดการแชตลูกค้า<br />สำหรับร้านค้าใน Social Media
           </p>
-          <h5 class="tw-text-3xl tw-font-bold tw-mb-4">เข้าสู่ระบบ ASAP</h5>
+          <h5 class="tw-text-3xl font-weight-bold tw-mb-4">เข้าสู่ระบบ ASAP</h5>
         </div>
         <v-form v-model="isFormValid">
           <div class="form-control">
