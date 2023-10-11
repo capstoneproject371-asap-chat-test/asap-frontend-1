@@ -1,8 +1,13 @@
 /** @type {import('tailwindcss').Config} */
-export default {
+module.exports = {
   content: [],
   theme: {
     extend: {},
   },
   plugins: [require('daisyui')],
+  prefix: 'tw-',
+  important: true,
+  corePlugins: {
+    preflight: false,
+  },
 }
