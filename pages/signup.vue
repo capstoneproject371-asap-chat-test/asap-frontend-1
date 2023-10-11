@@ -1,11 +1,11 @@
 <template>
   <!-- TODO: connect with firebase -->
-  <div class="hero min-h-screen lg:bg-base-200">
+  <div class="tw-hero tw-min-h-screen lg:tw-bg-base-200">
     <div
-      class="card flex-shrink-0 sm:max-w-xl max-w-sm lg:shadow-2xl bg-base-100"
+      class="tw-card tw-flex-shrink-0 sm:tw-max-w-xl tw-max-w-sm lg:tw-shadow-2xl tw-bg-base-100"
       style="width: 1500px"
     >
-      <div class="card-body">
+      <div class="tw-card-body">
         <div class="text-center">
           <v-img
             :width="100"
@@ -13,13 +13,13 @@
             src="/images/logo.png"
             class="mx-auto"
           ></v-img>
-          <p class="mb-5">
+          <p class="tw-mb-5">
             ระบบจัดการแชตลูกค้า<br />สำหรับร้านค้าใน Social Media
           </p>
-          <h5 class="text-3xl font-bold mb-4">สร้างบัญชี ASAP</h5>
+          <h5 class="tw-text-3xl tw-font-bold tw-mb-4">สร้างบัญชี ASAP</h5>
         </div>
         <v-form v-model="isFormValid">
-          <div class="form-control mt-2">
+          <div class="form-control tw-mt-2">
             <CommonTextField
               :rules="[required, checkEmail]"
               v-model="userInfo.email"
@@ -29,7 +29,7 @@
               label="อีเมล"
             />
           </div>
-          <div class="form-control mt-2">
+          <div class="form-control tw-mt-2">
             <CommonTextField
               :rules="[required, passwordLength]"
               v-model="userInfo.password"
@@ -42,7 +42,7 @@
               counter
             />
           </div>
-          <div class="form-control mt-2">
+          <div class="form-control tw-mt-2">
             <CommonTextField
               :rules="[
                 required,
@@ -58,7 +58,7 @@
               :type="confirmVisible ? 'text' : 'password'"
             />
           </div>
-          <div class="form-control mt-2">
+          <div class="form-control tw-mt-2">
             <v-radio-group
               label="คุณเป็นเจ้าของร้านค้าใช่หรือไม่?"
               inline
@@ -69,7 +69,7 @@
                 label="ใช่"
                 :value="true"
                 color="primary"
-                class="mr-7"
+                class="tw-mr-7"
               ></v-radio>
               <v-radio
                 label="ไม่ใช่"
@@ -79,7 +79,7 @@
               ></v-radio>
             </v-radio-group>
             <p
-              class="text-xs text-error"
+              class="tw-text-xs text-error"
               v-if="userInfo?.isOwner === false"
             >
               ในกรณีที่ท่านไม่ใช่เจ้าของร้านค้า ท่านจะมีสิทธิ์เป็น Agent Lead
@@ -89,7 +89,7 @@
         </v-form>
         <!-- Biz question -->
         <div v-if="!!userInfo?.isOwner">
-          <div class="form-control mb-3">
+          <div class="form-control tw-mb-3">
             <CommonTextField
               :rules="[required]"
               v-model="userInfo.shop!.name"
@@ -99,7 +99,7 @@
               label="ชื่อธุรกิจ"
             />
           </div>
-          <div class="form-control mb-3">
+          <div class="form-control tw-mb-3">
             <v-autocomplete
               label="ประเภทธุรกิจ"
               id="bizCategory"
@@ -111,7 +111,7 @@
               v-model="userInfo.shop!.category"
             ></v-autocomplete>
           </div>
-          <div class="form-controls mb-3">
+          <div class="form-controls tw-mb-3">
             <CommonTextField
               label="รายละเอียด (ไม่จำเป็น)"
               placeholder="เช่น ร้านขายเสื้อผ้า, ร้านเสริมสวย"
@@ -119,7 +119,7 @@
             />
           </div>
           <v-form v-model="isSocialValid">
-            <div class="form-control mt-5">
+            <div class="form-control tw-mt-5">
               <p>
                 ช่องทาง social media
                 <span class="text-error">อย่างน้อย 1 ช่องทาง</span>
@@ -175,7 +175,7 @@
             </div>
           </v-form>
         </div>
-        <div class="form-control my-2">
+        <div class="form-control tw-my-2">
           <v-btn
             block
             size="large"

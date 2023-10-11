@@ -1,22 +1,22 @@
 <template>
   <!-- TODO: connect with firebase -->
-  <div class="hero min-h-screen lg:bg-base-200 xs:bg-white">
+  <div class="tw-hero tw-min-h-screen lg:tw-bg-base-200 xs:tw-bg-white">
     <div
-      class="card flex-shrink-0 sm:max-w-xl max-w-sm lg:shadow-2xl bg-base-100"
+      class="tw-card tw-flex-shrink-0 sm:tw-max-w-xl tw-max-w-sm lg:tw-shadow-2xl tw-bg-base-100"
       style="width: 1500px"
     >
-      <div class="card-body">
+      <div class="tw-card-body">
         <div class="text-center">
           <v-img
             :width="100"
             aspect-ratio="1/1"
             src="/images/logo.png"
-            class="mx-auto"
+            class="tw-mx-auto"
           />
-          <p class="mb-5">
+          <p class="tw-mb-5">
             ระบบจัดการแชตลูกค้า<br />สำหรับร้านค้าใน Social Media
           </p>
-          <h5 class="text-3xl font-bold mb-4">เข้าสู่ระบบ ASAP</h5>
+          <h5 class="tw-text-3xl tw-font-bold tw-mb-4">เข้าสู่ระบบ ASAP</h5>
         </div>
         <v-form v-model="isFormValid">
           <div class="form-control">
@@ -29,7 +29,7 @@
               label="อีเมล"
             />
           </div>
-          <div class="form-control mt-2">
+          <div class="form-control tw-mt-2">
             <CommonTextField
               :rules="[required]"
               v-model="password"
@@ -41,7 +41,7 @@
               :type="visible ? 'text' : 'password'"
             />
           </div>
-          <div class="form-control my-2">
+          <div class="form-control tw-my-2">
             <v-btn
               block
               size="large"
@@ -55,13 +55,10 @@
             </v-btn>
           </div>
         </v-form>
-        <p class="text-medium-emphasis text-black">
+        <p class="text-medium-emphasis tw-text-black">
           ยังไม่เคยมีบัญชี?
           <NuxtLink to="/signup">
-            <a
-              class="text-primary text-decoration-underline"
-              href="#"
-            >
+            <a class="text-primary text-decoration-underline">
               ลงทะเบียนที่นี่</a
             >
           </NuxtLink>
