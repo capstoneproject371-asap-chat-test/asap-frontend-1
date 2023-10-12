@@ -1,4 +1,4 @@
-name: CI/CD-DEV
+name: CI Dev
 on:
   push:
     branches: [main]
