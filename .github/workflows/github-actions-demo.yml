@@ -16,4 +16,19 @@ jobs:
         run: npm install
       - name: Build
         run: npm run build
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Deploy to Server
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      run: |
+        ssh-keyscan -t rsa 10.4.85.36 >> ~/.ssh/known_hosts
+        echo "${SSH_PRIVATE_KEY}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        git clone https://github.com/ASAP-Chat/asap-frontend.git
+        cd asap-front
+        git checkout main
+        # Perform deployment steps, e.g., copy built files to the server
 
