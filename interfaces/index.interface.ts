@@ -3,3 +3,7 @@ export interface SocialLinks {
   instagram: string
   line: string
 }
+
+export interface PathToTitleMap {
+  [key: string]: string
+}
