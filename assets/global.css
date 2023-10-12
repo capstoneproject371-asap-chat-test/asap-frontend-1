@@ -1,8 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Anuphan&display=swap');
-
 body {
-  font-family: 'Anuphan', sans-serif;
+  font-family: 'Anuphan';
 }
 
 .btn-shadow {
