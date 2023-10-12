@@ -1,7 +1,8 @@
 name: CI-DEV
 on:
   push:
-    branches: [dev]
+    branches: 
+      - main
 jobs:
   build_and_push_image:
     runs-on: ubuntu-20.04
