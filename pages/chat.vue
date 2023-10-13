@@ -51,7 +51,7 @@
     </v-list>
   </v-navigation-drawer>
 
-  <!-- <div>
+  <div>
     <v-card
       class="mx-auto text-center"
       width="500"
@@ -68,7 +68,7 @@
         </v-card-title>
       </div>
     </v-card>
-  </div> -->
+  </div>
 </template>
 <script setup lang="ts">
 useHead({
