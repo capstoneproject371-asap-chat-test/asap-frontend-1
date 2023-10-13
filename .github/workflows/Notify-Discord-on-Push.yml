@@ -15,12 +15,12 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: 16  # ระบุ Node.js เวอร์ชัน 16 ที่นี่
+          node-version: 16 # ระบุ Node.js เวอร์ชัน 16 ที่นี่
 
       - name: Notify Discord
         run: |
-          if [ "$GITHUB_REF" = "refs/heads/main" ] || [ "$GITHUB_REF" = "refs/heads/develop" ]; then
-            curl -X POST -H "Content-Type: application/json" -d '{"content": "Code has been pushed to the repository!"}' ${{ secrets.DISCORD_WEBHOOK_URL }}
+          if [ "$GITHUB_REF" = "refs/heads/main" ]; then
+            curl -X POST -H "Content-Type: application/json" -d '{"content": "Code Frontend has been pushed to the repository!"}' ${{ secrets.DISCORD_WEBHOOK_URL }}
           fi
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
