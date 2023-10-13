@@ -17,10 +17,9 @@ jobs:
         with:
           node-version: 16 # ระบุ Node.js เวอร์ชัน 16 ที่นี่
 
-      - name: Notify Discord
-        run: |
-          if [ "$GITHUB_REF" = "refs/heads/main" ]; then
-            curl -X POST -H "Content-Type: application/json" -d '{"content": "Code Frontend has been pushed to the repository!"}' ${{ secrets.DISCORD_WEBHOOK_URL }}
-          fi
+      - name: Discord notification
         env:
-          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        uses: Ilshidur/action-discord@master
+        with:
+          args: 'The project {{ EVENT_PAYLOAD.repository.full_name }} has been deployed.'
