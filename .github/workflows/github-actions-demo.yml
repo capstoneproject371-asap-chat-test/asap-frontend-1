@@ -18,7 +18,7 @@ jobs:
         run: npm install
       - name: Build
         run: npm run build
-      - name: Github
-        uses: action/super-linter@v3
+      - name: Run Super-Linter
+        uses: github/super-linter@v3
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN_LOGIN_GITHUB }}
