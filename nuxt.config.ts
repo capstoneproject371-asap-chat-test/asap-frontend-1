@@ -1,8 +1,12 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  devServer: {
+    port: 4000,
+  },
   devtools: { enabled: true },
   modules: [
     '@nuxtjs/tailwindcss',
+    'dayjs-nuxt',
     [
       '@nuxtjs/google-fonts',
       {
@@ -29,5 +33,10 @@ export default defineNuxtConfig({
     config: {},
     injectPosition: 'first',
     viewer: true,
+  },
+  dayjs: {
+    plugins: ['relativeTime', 'utc', 'timezone'],
+    defaultLocale: 'th',
+    defaultTimezone: 'Asia/Bangkok',
   },
 })
