@@ -14,11 +14,7 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 16
-      - name: Install dependencies
-        run: npm install
-      - name: Build
-        run: npm run build
-      - name: Run Super-Linter
-        uses: github/super-linter@v3
-        env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN_LOGIN_GITHUB }}
+      # - name: Install dependencies
+      #   run: npm install
+      # - name: Build
+      #   run: npm run build
