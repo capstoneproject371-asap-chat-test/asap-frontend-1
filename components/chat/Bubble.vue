@@ -6,9 +6,9 @@
       </div>
     </div>
     <div class="tw-chat-header">
-      {{ props.name }}
-      <time class="tw-text-xs tw-opacity-50">{{
-        useDayjs()(props.time).format('DD/MM/YYYY HH:mm')
+      <span class="font-weight-bold">{{ props.name }}</span>
+      <time class="tw-text-xs tw-opacity-50 tw-ms-2">{{
+        useDayjs()(props.time).format('ddd, DD/MM/YYYY HH:mm')
       }}</time>
     </div>
     <div class="tw-chat-bubble">{{ props.msg }}</div>
