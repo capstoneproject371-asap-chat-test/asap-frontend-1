@@ -10,13 +10,8 @@
       <time class="tw-text-xs tw-opacity-50">{{
         useDayjs()(props.time).format('DD/MM/YYYY HH:mm')
       }}</time>
-
-      <!-- <div>
-        {{ dayjs().format('YYYY-MM-DD') }}
-      </div> -->
     </div>
     <div class="tw-chat-bubble">{{ props.msg }}</div>
-    <div class="tw-chat-footer tw-opacity-50">Delivered</div>
   </div>
 </template>
 <script setup lang="ts">
