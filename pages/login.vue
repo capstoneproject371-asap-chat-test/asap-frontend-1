@@ -73,6 +73,10 @@ useHead({
   title: 'Welcome to ASAP',
 })
 
+definePageMeta({
+  layout: false,
+})
+
 const email = ref('')
 const password = ref('')
 const isFormValid = ref(false)

@@ -206,6 +206,10 @@ import UserSignup from '~/interfaces/signup.interface'
 useHead({
   title: 'Welcome to ASAP',
 })
+
+definePageMeta({
+  layout: false,
+})
 const {
   checkEmail,
   required,
