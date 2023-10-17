@@ -35,8 +35,9 @@ export default defineNuxtConfig({
     viewer: true,
   },
   dayjs: {
-    plugins: ['relativeTime', 'utc', 'timezone'],
+    locales: ['th'],
     defaultLocale: 'th',
     defaultTimezone: 'Asia/Bangkok',
+    plugins: ['relativeTime', 'utc', 'timezone'],
   },
 })
