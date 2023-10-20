@@ -67,11 +67,7 @@
           height="90"
           :prepend-avatar="message.senderDetail.pictureUrl"
           :title="message.senderDetail.displayName"
-          :subtitle="
-            message.type === 'STICKER'
-              ? `${message.senderDetail.displayName} ส่งสติกเกอร์`
-              : message.message
-          "
+          :subtitle="getMessageSubtitle(message)"
           :value="message.senderDetail.userId"
           :active="
             message.senderDetail.userId === selectCustomer.senderDetail.userId
@@ -145,7 +141,7 @@
           </div>
         </v-navigation-drawer>
 
-        <v-app-bar :elevation="2">
+        <v-app-bar>
           <template v-slot:prepend>
             <v-img
               :width="40"
@@ -227,7 +223,16 @@ const shouldDisplayTime = (index: number) => {
 
   return isDifferentDay
 }
-
+const getMessageSubtitle = (message: any) => {
+  switch (message.type) {
+    case 'STICKER':
+      return `${message.senderDetail.displayName} ส่งสติกเกอร์`
+    case 'IMAGE':
+      return `${message.senderDetail.displayName} ส่งรูปภาพ`
+    default:
+      return message.message
+  }
+}
 const socket = io('http://localhost:3000')
 socket.on('connect', () => {
   console.log('Socket connected FE')
