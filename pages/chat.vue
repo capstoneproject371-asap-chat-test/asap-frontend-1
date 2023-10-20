@@ -193,6 +193,7 @@
                 append-icon="mdi-send"
                 type="text"
                 @click:append=""
+                @keydown.prevent.enter="sendMessage(sendMsg)"
               />
             </v-col>
           </v-row>
@@ -223,6 +224,7 @@ const shouldDisplayTime = (index: number) => {
 
   return isDifferentDay
 }
+
 const getMessageSubtitle = (message: any) => {
   switch (message.type) {
     case 'STICKER':
@@ -233,6 +235,7 @@ const getMessageSubtitle = (message: any) => {
       return message.message
   }
 }
+
 const socket = io('http://localhost:3000')
 socket.on('connect', () => {
   console.log('Socket connected FE')
@@ -254,6 +257,11 @@ const selectCustomer = ref<any>({
   },
 })
 
+const sendMessage = (msg: string) => {
+  alert(`Have Send : ${msg}`)
+  console.log('sent msg', msg)
+}
+
 const setSelectCustomer = (userId: any, displayName: any, pictureUrl: any) => {
   fetchFilterChat(userId)
   selectCustomer.value.senderDetail = { userId, displayName, pictureUrl }
@@ -270,7 +278,8 @@ const fetchFilterChat = async (customerId: any) => {
       filteredMessages.value = await data.data.value
       filteredMessagesDate.value = filteredMessages.value
     }
-  } catch (error: any) {
+    window.scrollTo(0, document.body.offsetHeight)
+  } catch (error) {
     console.log(error)
   }
 }
