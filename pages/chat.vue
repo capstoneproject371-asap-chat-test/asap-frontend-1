@@ -59,14 +59,19 @@
     >
       <v-list
         class="tw-p-0"
-        v-for="message in filteredMessages"
+        v-if="latestMessages"
+        v-for="message in latestMessages.data"
       >
         <v-list-item
           class="tw-gap-x-3"
           height="90"
           :prepend-avatar="message.senderDetail.pictureUrl"
           :title="message.senderDetail.displayName"
-          :subtitle="message.message"
+          :subtitle="
+            message.type === 'STICKER'
+              ? `${message.senderDetail.displayName} ส่งสติกเกอร์`
+              : message.message
+          "
           :value="message.senderDetail.userId"
           :active="
             message.senderDetail.userId === selectCustomer.senderDetail.userId
@@ -96,25 +101,9 @@
       </v-list>
     </v-navigation-drawer>
   </div>
-
+  <!-- TODO: scroll to bottom -->
   <div>
-    <!-- <v-card
-      class="mx-auto text-center"
-      width="500"
-      height="150"
-    >
-      <div>
-        <v-icon
-          icon="mdi-alert-circle-outline"
-          size="50"
-          color="error"
-        />
-        <v-card-title>
-          โปรดเชื่อมต่อบัญชี Social Media ก่อนใช้งานระบบ
-        </v-card-title>
-      </div>
-    </v-card> -->
-    <div v-if="fetchChat">
+    <div v-if="filteredMessages">
       <div
         v-if="
           selectCustomer.senderDetail.userId.trim() !== '' &&
@@ -155,6 +144,7 @@
             </div>
           </div>
         </v-navigation-drawer>
+
         <v-app-bar :elevation="2">
           <template v-slot:prepend>
             <v-img
@@ -177,16 +167,16 @@
           </template>
         </v-app-bar>
       </div>
-
-      <div v-for="message in fetchChat.data">
-        <div v-if="message.senderDetail.userId === showIndex">
-          <ChatBubble
-            :msg="message.message"
-            :name="message.senderDetail.displayName"
-            :img="message.senderDetail.pictureUrl"
-            :time="message.sourceTimestamp"
-          />
-        </div>
+      <div v-for="(message, index) in filteredMessages.data">
+        <ChatBubble
+          :msgType="message.messageObject.type"
+          :msg-text="message.messageObject.text"
+          :msg-sticker="message.messageObject.link"
+          :name="message.senderDetail.displayName"
+          :img="message.senderDetail.pictureUrl"
+          :date="shouldDisplayTime(index) ? message.sourceTimestamp : ''"
+          :time="message.sourceTimestamp"
+        />
       </div>
     </div>
 
@@ -216,13 +206,39 @@
   </div>
 </template>
 <script setup lang="ts">
+import io from 'socket.io-client'
+const latestMessages = ref()
+const filteredMessages = ref()
+
+const filteredMessagesDate = ref()
+
+const shouldDisplayTime = (index: number) => {
+  if (index === 0) {
+    return true
+  }
+
+  const currentMessage = filteredMessagesDate.value.data[index]
+  const previousMessage = filteredMessagesDate.value.data[index - 1]
+
+  const currentDate = new Date(currentMessage.sourceTimestamp)
+  const previousDate = new Date(previousMessage.sourceTimestamp)
+
+  const isDifferentDay = currentDate.getDate() !== previousDate.getDate()
+
+  return isDifferentDay
+}
+
+const socket = io('http://localhost:3000')
+socket.on('connect', () => {
+  console.log('Socket connected FE')
+})
+
 useHead({
   title: 'แชต',
 })
 
 const drawer = ref(false)
 const rail = ref(false)
-const showIndex = ref()
 const sendMsg = ref()
 
 const selectCustomer = ref<any>({
@@ -234,42 +250,51 @@ const selectCustomer = ref<any>({
 })
 
 const setSelectCustomer = (userId: any, displayName: any, pictureUrl: any) => {
-  showIndex.value = userId
+  fetchFilterChat(userId)
   selectCustomer.value.senderDetail = { userId, displayName, pictureUrl }
-  console.log(
-    '🍪🥛 ~ file: chat.vue:159 ~ setSelectCustomer ~ selectCustomer:',
-    selectCustomer
-  )
 }
 
-const fetchChat = ref()
-const filteredMessages = ref()
+let intervalId
 
-const fetchAllChat = async () => {
+const fetchFilterChat = async (customerId: any) => {
   try {
     const data = await useFetch(
-      'http://localhost:3000/api/social-message/ASAP-Shop/pisenuta'
+      `http://localhost:3000/api/social-message/ASAP-Shop/652e92d9fbacd5abf57c6249/${customerId}?$limit=50`
     )
-    fetchChat.value = await data.data.value
-    if (fetchChat.value) {
-      const latestMessages: any = {}
-
-      fetchChat.value.data.forEach((message: any) => {
-        const userId = message.senderDetail.userId
-        latestMessages[userId] = message
-      })
-
-      filteredMessages.value = Object.values(latestMessages)
+    if (selectCustomer) {
+      filteredMessages.value = await data.data.value
+      filteredMessagesDate.value = filteredMessages.value
     }
-    console.log(
-      '🍪🥛 ~ file: chat.vue:246 ~ fetchAllChat ~ fetchChat:',
-      fetchChat
-    )
   } catch (error: any) {
     console.log(error)
   }
 }
-fetchAllChat()
+
+const fetchLatestMessages = async () => {
+  try {
+    const data = await useFetch(
+      'http://localhost:3000/api/social-message/ASAP-Shop/652e92d9fbacd5abf57c6249/'
+    )
+    latestMessages.value = await data.data.value
+    if (Array.isArray(latestMessages.value)) {
+      latestMessages.value.sort(
+        (a: { sourceTimestamp: string }, b: { sourceTimestamp: string }) => {
+          return (
+            new Date(b.sourceTimestamp).getTime() -
+            new Date(a.sourceTimestamp).getTime()
+          )
+        }
+      )
+    }
+  } catch (error: any) {
+    console.log(error)
+  }
+}
+
+fetchLatestMessages()
+// intervalId = setInterval(() => {
+//   fetchLatestMessages()
+// }, 1000)
 </script>
 <style>
 .v-list-item-title {
