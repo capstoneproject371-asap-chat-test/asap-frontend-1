@@ -4,7 +4,7 @@ WORKDIR /asap-frontend
 COPY package*.json ./
 RUN npm install
 RUN npm i daisyui
-RUN npm install @feathersjs/socketio-client socket.io-client --save
+RUN npm install @feathersjs/socketio-client --save
 COPY . .
 RUN npm run generate
 
