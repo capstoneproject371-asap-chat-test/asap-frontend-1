@@ -2,8 +2,8 @@ name: CI/CD Dev
 on:
   push:
     branches: [main]
-  # pull_request:
-  #   branches: [main]
+  pull_request:
+    branches: [main]
 jobs:
   build-push:
     runs-on: ubuntu-latest
@@ -73,11 +73,8 @@ jobs:
           script: |
             cd /home/sysadmin/Test/asap
             docker login --username ${{ github.actor }} --password ${{ secrets.GITHUB_TOKEN }} ghcr.io 
-            # docker-compose stop front
-            # docker-compose rm --force front
             docker-compose stop asapfrontendcon
             docker-compose rm --force asapfrontendcon
-            # docker rmi ghcr.io/ziim-eiei/oasip-pl-3-frontend
             docker rmi ghcr.io/capstoneproject371-asap-chat-test/asap-frontend-1-images
             docker pull ghcr.io/capstoneproject371-asap-chat-test/asap-frontend-1-images
             docker-compose pull asapfrontendcon
