@@ -71,7 +71,7 @@ jobs:
           password: ${{ secrets.SSH_PASSWORD }}
           port: ${{ secrets.SSH_PORT }}
           script: |
-            cd /Test/asap/
+            cd /home/sysadmin/Test/asap
             docker login --username ${{ github.actor }} --password ${{ secrets.GITHUB_TOKEN }} ghcr.io 
             # docker-compose stop front
             # docker-compose rm --force front
