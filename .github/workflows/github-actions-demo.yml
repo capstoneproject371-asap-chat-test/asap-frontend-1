@@ -78,7 +78,7 @@ jobs:
             docker-compose stop asapfrontendcon
             docker-compose rm --force asapfrontendcon
             # docker rmi ghcr.io/ziim-eiei/oasip-pl-3-frontend
-            docker rmi ghcr.io/capstoneproject371-asap-chat-test/asap-frontend-images
-            docker pull ghcr.io/capstoneproject371-asap-chat-test/asap-frontend-images
+            docker rmi ghcr.io/capstoneproject371-asap-chat-test/asap-frontend-1-images
+            docker pull ghcr.io/capstoneproject371-asap-chat-test/asap-frontend-1-images
             docker-compose pull asapfrontendcon
             docker-compose up -d asapfrontendcon
